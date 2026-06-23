@@ -1,0 +1,6 @@
+/* Zolar Capital — top-level App styles */
+.App {
+    min-height: 100vh;
+    background: var(--zc-bg);
+    color: var(--zc-text);
+}
