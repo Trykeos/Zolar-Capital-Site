@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
 import Solutions from '@/pages/Solutions';
@@ -10,7 +10,7 @@ import Contact from '@/pages/Contact';
 export default function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -20,7 +20,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </Layout>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

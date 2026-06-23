@@ -1,104 +1,81 @@
 # Zolar Capital Website
 
-This repo recreates the Emergent preview as a clean Vite + React project for GitHub.
+GitHub-ready recreation of the Emergent Zolar Capital site.
 
-## What is included
+## Important: avoid the GitHub Pages white screen
 
-- React source recreated from the uploaded Emergent bundle
-- Zolar sun logo component
-- Cinematic intro animation
-- Platform dropdown
-- Home page
-- Solutions page
-- Dynamic product pages
-- Consulting page
-- Contact page
-- Tailwind + custom Zolar styling
-- GitHub Pages fallback helper
-- Original uploaded bundle preserved in `original-bundle/bundle.js`
+Do not publish the raw source folder directly as GitHub Pages. This is a React/Vite app and must be built first.
 
-## Tech stack
+This repo includes a GitHub Actions workflow at:
 
-- Vite
-- React
-- React Router
-- Framer Motion
-- Tailwind CSS
-- Lucide React
-- Axios
-- TanStack React Query
+```text
+.github/workflows/deploy.yml
+```
 
-## Local setup
+That workflow installs dependencies, runs `npm run build`, and deploys the generated `dist` folder to GitHub Pages.
+
+## Local development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open the local URL shown by Vite.
-
-## Build
+## Local production preview
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Contact form API
+## Deploy to GitHub Pages
 
-The contact page posts to:
+1. Create a GitHub repository.
+2. Push this folder to the `main` branch.
+3. In GitHub, go to **Settings > Pages**.
+4. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+5. Push to `main`, or manually run the workflow under the **Actions** tab.
+
+The app uses `HashRouter` so GitHub Pages can serve it from either a project URL like:
 
 ```text
-/api/leads
+https://your-user.github.io/your-repo/
 ```
 
-Set `VITE_ZOLAR_API_URL` if your API is on another domain.
+or a custom domain like:
 
-Example `.env.local`:
+```text
+https://zolarcapital.com/
+```
+
+without blank pages on refresh or nested routes.
+
+## Contact form API
+
+Create `.env.local` if you have a backend endpoint:
 
 ```bash
 VITE_ZOLAR_API_URL=https://api.zolarcapital.com
 ```
 
-The final request will go to:
+The contact form posts to:
 
 ```text
-https://api.zolarcapital.com/api/leads
+${VITE_ZOLAR_API_URL}/api/leads
 ```
 
-## GitHub setup
+If this is not set, it falls back to the original preview backend URL from the Emergent build.
 
-```bash
-git init
-git add .
-git commit -m "Initial Zolar Capital website"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/zolarcapital-site.git
-git push -u origin main
-```
+## Included pages
 
-## Deployment options
-
-### Vercel
-
-1. Push this repo to GitHub.
-2. Import the repo in Vercel.
-3. Framework preset: Vite.
-4. Build command: `npm run build`.
-5. Output directory: `dist`.
-
-### Netlify
-
-1. Push this repo to GitHub.
-2. Import the repo in Netlify.
-3. Build command: `npm run build`.
-4. Publish directory: `dist`.
-5. `_redirects` is included for client-side routing.
-
-### GitHub Pages
-
-Use GitHub Actions or a Vite GitHub Pages deployment workflow. Because the site uses React Router, keep the included `public/404.html` fallback.
+- Home
+- Solutions
+- Product detail pages
+- Consulting
+- Contact
 
 ## Notes
 
-The source was reconstructed from the uploaded `bundle.js`. The `original-bundle` folder is included for traceability and comparison, but the maintainable code lives in `src/`.
+- The app was reconstructed from the uploaded Emergent `bundle.js`.
+- The source version is the recommended GitHub repo.
+- The compiled static bundle is useful only as a reference or short-term fallback.
